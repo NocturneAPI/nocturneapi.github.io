@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nocturne API</title>
+
+    <script
+      src="https://kit.fontawesome.com/211b7a92c5.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <style>
+      *,
+      ::before,
+      ::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        color: aliceblue;
+      }
+
+      html {
+        background-color: rgb(20, 20, 30);
+      }
+
+      body {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+      }
+
+      .header {
+        background-color: rgb(30, 30, 40);
+        padding: 40px;
+        color: #fff;
+        /* font-size: 1.5em; */
+        font-family: Consolas;
+      }
+
+      .container {
+        width: 70%;
+        margin: 30px auto;
+      }
+
+      .footer {
+        background-color: rgb(30, 30, 40);
+        padding: 40px;
+        color: #fff;
+        /* font-size: 1.5em; */
+        font-family: Consolas;
+        margin-top: auto;
+      }
+
+      .row {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .container > .row {
+        padding: 1em 0;
+      }
+
+      .col {
+        flex: 1;
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+        /* align-items: center; */
+        flex-direction: column;
+      }
+
+      .col > img {
+        margin: 0 auto;
+      }
+
+      p {
+        margin-top: 1em;
+        text-align: justify;
+        font-family: Consolas;
+      }
+
+      h1:not(.title) {
+        font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+      }
+
+      img {
+        width: 70%;
+        background-color: #ffffff06;
+        border-radius: 10px;
+        padding: 30px;
+      }
+
+      li {
+        margin-top: 0.5em;
+      }
+
+      button {
+        padding: 1em;
+        width: fit-content;
+        align-self: center;
+        background-color: rgb(40, 40, 45);
+        border: 0;
+        border-radius: 10px;
+      }
+
+      textarea {
+        padding: 1em;
+        margin-top: 1em;
+        /* width: fit-content; */
+        /* align-self: center; */
+        background-color: rgb(40, 40, 45);
+        border: 0;
+        border-radius: 10px;
+      }
+
+      input {
+        padding: 1em;
+        margin-top: 1em;
+        /* width: fit-content; */
+        /* align-self: center; */
+        background-color: rgb(40, 40, 45);
+        border: 0;
+        border-radius: 10px;
+      }
+
+      label {
+        padding-bottom: 0.5em;
+        width: fit-content;
+        font-weight: bolder;
+        /* align-self: center; */
+        border-bottom: dotted 1px white;
+      }
+
+      hr {
+        margin: 1.5em 0 1em 0;
+        border-color: #ffffff5f;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          width: 90%;
+        }
+
+        .row {
+          flex-direction: column;
+        }
+
+        .hidden-xs {
+          display: none;
+        }
+      }
+
+      #loading {
+        animation: spin 1s infinite;
+        font-size: 2em;
+        margin-top: 1em;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <h1 class="title">Nocturne API <sup>v1</sup></h1>
+      <h2 class="subtitle">Gestionnaire de containers distants.</h2>
+    </header>
+
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <h1>Présentation</h1>
+
+          <p>
+            Je vous présente aujourd'hui le projet Nocturne API. Ce projet est
+            un gestionnaire de containers distants. Il vous permet d'envoyer, de
+            gérer et de recevoir des fichiers hébergés sur nos serveurs.
+          </p>
+
+          <p>
+            Intégrer cette API dans vos programmes vous sera utile si vous avez
+            besoin de stocker des informations diverses (utilisateurs, images,
+            etc.).
+          </p>
+
+          <p>
+            Vous pourrez gérer votre container personnel et partager des
+            ressources au monde entier via le container collectif. Il vous
+            suffira de spécifier si l'import est privé ou public.
+          </p>
+
+          <p>
+            Les données stockées sont chiffrées et protégées. À chaque upload,
+            la donnée va être chiffrée puis déchiffrée en cas de demande. Vous
+            n'aurez donc pas à vous soucier de la lisibilité de vos fichiers.
+          </p>
+
+          <p>
+            En cas de besoins, votre clé pourra être réinitialisée. Vous pourrez
+            transférer vos données de containers en containers.
+          </p>
+        </div>
+        <div class="col hidden-xs">
+          <img src="undraw_apps_re_ienc.svg" />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col hidden-xs">
+          <img src="undraw_personal_data_re_ihde.svg" />
+        </div>
+        <div class="col">
+          <h1>Fonctionnalités</h1>
+
+          <p>
+            Ce projet vous permettra de stocker vos données en utilisant des
+            requêtes HTTP/s. De ce fait, vous pourrez intéragir avec votre
+            container via votre propre interface et/ou projet.
+          </p>
+
+          <p>
+            Les fonctionnalités actuelles suivent les standards HTTP/s.
+
+            <li><strong>POST</strong> vous permettra de poster une donnée,</li>
+
+            <li>
+              <strong>GET</strong> vous permettra de récupérer une donnée,
+            </li>
+
+            <li><strong>PUT</strong> vous permettra de modifier une donnée,</li>
+
+            <li>
+              <strong>DELETE</strong> vous permettra de supprimer une donnée.
+            </li>
+          </p>
+
+          <p>
+            L'exemple le plus prometteur d'utilisation de vos containers
+            seraient pour la création d'applications NodeJS qui utilisent la
+            technologie Electron. Vous pourrez alors communiquer avec vos
+            containers via une interface.
+          </p>
+
+          <p>
+            <b>
+              <a
+                href="https://nodejs.org/api/http.html#httprequestoptions-callback"
+                target="_blank"
+              >
+                Comment envoyer des requêtes HTTP avec NodeJS ?
+              </a>
+            </b>
+          </p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <h1>Contributions</h1>
+
+          <p>
+            Vous pouvez contribuer au projet en vous achetant une clé d'API, ou
+            en nous disant ce que vous voudriez améliorer via notre formulaire
+            de contact. Tous les conseils sont bons à prendre!
+          </p>
+
+          <hr />
+
+          <div>
+            <div class="row">
+              <div class="col">
+                <label for="name">Nom</label>
+                <input type="text" id="name" />
+              </div>
+              <div class="col">
+                <label for="email">Email</label>
+                <input type="email" id="email" />
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <label for="message">Message</label>
+                <textarea id="message" rows="10"></textarea>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <button id="send">Envoyer</button>
+              </div>
+
+              <div id="done" style="display: none">
+                <p>Merci pour votre message!</p>
+              </div>
+
+              <div id="error" style="display: none">
+                <p>Une erreur est survenue, veuillez réessayer.</p>
+              </div>
+
+              <div>
+                <i
+                  id="loading"
+                  style="display: none"
+                  class="fa fa-circle-notch"
+                ></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col hidden-xs">
+          <img src="undraw_appreciated_xcjn.svg" />
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <p>© 2022 — Paul BONCAR.</p>
+    </footer>
+
+    <script>
+      // send form to 77.137.228.53:8080
+      document.querySelector("#send").addEventListener("click", function (e) {
+        e.preventDefault();
+
+        const name = document.querySelector("#name").value;
+        const email = document.querySelector("#email").value;
+        const message = document.querySelector("#message").value;
+
+        document.querySelector("#loading").style.display = "block";
+
+        var req = new XMLHttpRequest();
+
+        req.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+            document.querySelector("#loading").style.display = "none";
+            document.querySelector("#done").style.display = "block";
+          } else if (this.readyState == 4 && this.status != 200) {
+            document.querySelector("#loading").style.display = "none";
+            document.querySelector("#error").style.display = "block";
+          }
+        };
+
+        req.open("POST", "http://77.137.228.53:8080/contact", true);
+        req.setRequestHeader("Content-Type", "application/json");
+        req.send(
+          JSON.stringify({
+            name: name,
+            email: email,
+            message: message,
+          })
+        );
+
+        document.querySelector("#name").value = "";
+        document.querySelector("#email").value = "";
+        document.querySelector("#message").value = "";
+      });
+    </script>
+  </body>
+</html>
